@@ -1,0 +1,25 @@
+{
+    "name": "arckinteractive/statamic-bard-font-weight",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Arckinteractive\\StatamicBardFontWeight\\": "src"
+        }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "php artisan vendor:publish --tag=arckinteractive-bard-font-weight"
+        ]
+    },
+    "extra": {
+        "statamic": {
+            "name": "Statamic Bard Font Weight",
+            "description": "Statamic Bard Font Weight addon"
+        },
+        "laravel": {
+            "providers": [
+                "Arckinteractive\\StatamicBardFontWeight\\ServiceProvider"
+            ]
+        }
+    }
+}
