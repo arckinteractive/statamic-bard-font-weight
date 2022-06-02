@@ -7,9 +7,8 @@ Statamic.$components.register('ArckFontWeightMenu', require('./ArckFontWeightMen
 
 Statamic.$bard.buttons(() => {
     return {
-        name: 'arckFontWeight',
+        name: 'arckfontweight',
         text: 'Font Weight',
-        args: { key: "" },
         icon: 'arck-font-weight',
         component: ArckFontWeightMenu,
         command: (editor) => editor.command.setCustomExtension(),
