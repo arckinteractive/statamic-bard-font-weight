@@ -23,7 +23,7 @@ class ServiceProvider extends AddonServiceProvider
     {
         parent::boot();
 
-        Augmentor::addExtension('ArckfontWeight', new ArckFontWeight());
+        Augmentor::addExtension('ArckFontWeight', new ArckFontWeight());
 
         $this->publishes([
             __DIR__ . '/../public' => public_path('vendor/arckinteractive-bard-font-weight'),
