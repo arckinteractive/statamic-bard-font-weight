@@ -1,51 +1,53 @@
-export default class ArckFontWeight {
-    name() {
-        return "ArckFontWeight";
-    }
+const { Mark } = Statamic.$bard.tiptap.core;
 
-    schema() {
+const ArckFontWeight = Mark.create({
+    name: 'ArckFontWeight',
+
+    addAttributes() {
         return {
-            attrs: {
-                key: '',
+            key: {
+                default: '',
+                parseHtml: element => {element.querySelector('span.arck-font-weight').getAttribute('data-class')}
+            }
+        }
+    },
+
+    parseHtml() {
+        return [
+            {
+                tag: "span.arck-font-weight"
+            }
+        ]
+    },
+
+    renderHTML({ HTMLAttributes }) {
+        return [
+            'span',
+            {
+                ...HTMLAttributes,
+                class: 'arck-font-weight',
+                'data-class': HTMLAttributes.key,
+                'style': 'font-weight: ' + HTMLAttributes.key.replace('afw-', '') + ';'
             },
-            parseDOM: [
-                {
-                    tag: "span.arck-font-weight",
-                    getAttrs: (dom) => ({
-                        key: dom.getAttribute('data-class')
-                    })
+            0
+        ]
+    },
+
+    addCommands() {
+        return {
+            ArckFontWeight: (attributes) => ({ chain }) => {
+                if (attributes.key) {
+                    return chain()
+                        .setMark(this.name, attributes)
+                        .run()
                 }
-            ],
-            toDOM: (mark) =>  {
-                let style = 'font-weight: ' + mark.attrs.key.replace('afw-', '') + ';';
-
-                return [
-                    "span",
-                    {
-                        'data-class': mark.attrs.key,
-                        'style': style,
-                    },
-                    0,
-                ];
+    
+                return chain()
+                    .unsetMark(this.name, { extendEmptyMarkRange: true })
+                    .run()
             }
-        };
-    }
-
-    commands({type, updateMark, removeMark}) {
-        return attrs => {
-            if (attrs.key) {
-                return updateMark(type, attrs)
-            }
-
-            return removeMark(type)
         }
     }
+})
 
-    pasteRules({type}) {
-        return [];
-    }
-
-    plugins() {
-        return [];
-    }
-}
+export default ArckFontWeight;

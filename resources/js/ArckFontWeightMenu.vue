@@ -56,7 +56,7 @@ export default {
             };
         },
         currentKey() {
-            return this.editor.getMarkAttrs('ArckFontWeight').key;
+            return this.editor.getAttributes('ArckFontWeight').key;
         }
     },
     data() {

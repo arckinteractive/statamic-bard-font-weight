@@ -17,9 +17,7 @@ class ServiceProvider extends AddonServiceProvider
         __DIR__.'/../dist/css/arckinteractive-bard-font-weight.css'
     ];
 
-    protected $publishables = [
-
-    ];
+    protected $publishables = [];
 
     public function boot()
     {
