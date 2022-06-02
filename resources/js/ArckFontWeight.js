@@ -15,7 +15,7 @@ const ArckFontWeight = Mark.create({
     parseHtml() {
         return [
             {
-                tag: "span.arck-font-weight"
+                tag: 'span.arck-font-weight'
             }
         ]
     },
