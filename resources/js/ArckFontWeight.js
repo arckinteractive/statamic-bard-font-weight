@@ -1,51 +1,61 @@
-export default class ArckFontWeight {
-    name() {
-        return "ArckFontWeight";
-    }
 
-    schema() {
+const { Mark, mergeAttributes } = Statamic.$bard.tiptap.core;
+
+export const ArckFontWeight = Mark.create({
+    name: 'arckFontWeight',
+
+    addAttributes() {
         return {
-            attrs: {
-                key: '',
+            key: {
+                default: '',
             },
-            parseDOM: [
-                {
-                    tag: "span.arck-font-weight",
-                    getAttrs: (dom) => ({
-                        key: dom.getAttribute('data-class')
-                    })
-                }
-            ],
-            toDOM: (mark) =>  {
-                let style = 'font-weight: ' + mark.attrs.key.replace('afw-', '') + ';';
-
-                return [
-                    "span",
-                    {
-                        'data-class': mark.attrs.key,
-                        'style': style,
-                    },
-                    0,
-                ];
-            }
         };
-    }
+    },
 
-    commands({type, updateMark, removeMark}) {
-        return attrs => {
-            if (attrs.key) {
-                return updateMark(type, attrs)
+    parseHTML() {
+        return [
+            {
+                tag: "span.arck-font-weight",
+                getAttrs: (dom) => ({
+                    key: dom.getAttribute('data-class')
+                })
             }
+        ];
+    },
 
-            return removeMark(type)
+    renderHTML({mark, HTMLAttributes}) {
+        let style = 'font-weight: ' + mark.attrs.key.replace('afw-', '') + ';';
+
+        return [
+            "span",
+            mergeAttributes(HTMLAttributes,
+            {
+                'data-class': mark.attrs.key,
+                'style': style
+            }),
+            0,
+        ];
+    },
+
+    addCommands() {
+        return {
+            toggleArckFontWeight: (attributes) => ({ commands }) => {
+                console.log(attributes);
+                return commands.toggleMark(this.name, attributes);
+            }
         }
-    }
+    },
 
     pasteRules({type}) {
         return [];
-    }
+    },
 
     plugins() {
         return [];
     }
-}
+});
+
+
+
+
+

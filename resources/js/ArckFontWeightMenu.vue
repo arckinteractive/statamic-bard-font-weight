@@ -26,37 +26,49 @@ export default {
     computed: {
         classTypes() {
             return {
-                'afw-100': {
-                    name: '100',
+                'text-xs': {
+                    name: 'Extra Small Text',
                 },
-                'afw-200': {
-                    name: '200',
+                'text-sm': {
+                    name: 'Small Text',
                 },
-                'afw-300': {
-                    name: '300',
+                'text-base': {
+                    name: 'Regular Text',
                 },
-                'afw-400': {
-                    name: '400',
+                'text-lg': {
+                    name: 'Large Text',
                 },
-                'afw-500': {
-                    name: '500',
+                'text-xl': {
+                    name: 'Text XL',
                 },
-                'afw-600': {
-                    name: '600',
+                'text-2xl': {
+                    name: 'Text 2XL',
                 },
-                'afw-700': {
-                    name: '700',
+                'text-3xl': {
+                    name: 'Text 3XL',
                 },
-                'afw-800': {
-                    name: '800',
+                'text-4xl': {
+                    name: 'Text 4XL',
                 },
-                'afw-900': {
-                    name: '900',
+                'text-5xl': {
+                    name: 'Text 5XL',
+                },
+                'text-6xl': {
+                    name: 'Text 6XL',
+                },
+                'text-7xl': {
+                    name: 'Text 7XL',
+                },
+                'text-8xl': {
+                    name: 'Text 8XL',
+                },
+                'text-9xl': {
+                    name: 'Text 9XL',
                 },
             };
         },
         currentKey() {
-            return this.editor.getMarkAttrs('ArckFontWeight').key;
+            return this.editor.getAttributes('ArckFontWeight').key;
         }
     },
     data() {
@@ -71,7 +83,7 @@ export default {
         },
         setClassType(classTypeKey) {
             // update the editor
-            this.editor.commands.ArckFontWeight({
+            this.editor.commands.toggleArckFontWeight({
                 key: classTypeKey == this.currentKey ? false : classTypeKey
             })
             // hide the menu
@@ -79,11 +91,10 @@ export default {
         },
         getClass(key) {
             const classes = {
-                'class-type-label': true,
-                'arck-font-weight': true,
+                'class-type-label': true
             };
 
-            classes[key] = true;
+            classes['arck-' + key] = true;
 
             return classes;
         },
